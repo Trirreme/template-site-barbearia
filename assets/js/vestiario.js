@@ -150,7 +150,7 @@
             <h3 class="card__name">${p.name}</h3>
             <div class="card__price">${brl(p.price)}</div>
           </div>
-          <div class="sizes" role="group" aria-label="Tamanho">
+          <div class="sizes" role="group" aria-label="Tamanho" style="--cols:${p.sizes.length === 6 ? 3 : Math.min(4, p.sizes.length)}">
             ${p.sizes.map((s) => `<button class="size" type="button" data-size="${s}" aria-pressed="${single}">${s}</button>`).join("")}
           </div>
           <button class="btn" type="button" data-add>+ Sacola</button>

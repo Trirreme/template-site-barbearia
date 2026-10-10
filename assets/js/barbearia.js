@@ -5,6 +5,7 @@
   const { $, $$, brl, icon, waLink, openWa, help, mission, observeReveals } = window.APP;
 
   const state = { services: new Set(), barber: "any", date: null, time: null };
+  let onUpdate = () => {};
 
   const fmtDur = (min) => (min < 60 ? `${min} min` : `${Math.floor(min / 60)}h${min % 60 ? String(min % 60).padStart(2, "0") : ""}`);
   const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -18,7 +19,7 @@
     .map((s) => `
       <li><button class="grow" type="button" data-svc="${s.id}" aria-pressed="false">
         <span class="grow__check">${icon.check}</span>
-        <span class="grow__name">${s.name}${s.tag ? ` <span class="tag" style="font-size:.85rem">${s.tag}</span>` : ""}<small>${fmtDur(s.min)}</small></span>
+        <span class="grow__name">${s.name}${s.tag ? ` <span class="tag" style="font-size:.85rem">${s.tag}</span>` : ""}<small>${fmtDur(s.min)}</small><span class="grow__desc">${s.desc}</span></span>
         <span class="grow__price">${brl(s.price)}</span>
       </button></li>`)
     .join("");
@@ -190,6 +191,7 @@
 
     $("#st-label").textContent = svcs.length ? `${svcs.length} serviço${svcs.length > 1 ? "s" : ""}${state.time ? ` · ${state.time}` : ""}` : "Monte seu horário";
     $("#st-total").textContent = brl(total);
+    onUpdate();
   }
   nameInput.addEventListener("input", update);
   update();
@@ -219,8 +221,12 @@
   const sticky = $("#sticky");
   let summaryVisible = false;
   new IntersectionObserver(([e]) => { summaryVisible = e.isIntersecting; syncSticky(); }).observe($("#resumo"));
-  const syncSticky = () => sticky.classList.toggle("is-on", scrollY > innerHeight * 0.6 && !summaryVisible);
-  addEventListener("scroll", syncSticky, { passive: true });
+  const syncSticky = () => {
+    const on = state.services.size > 0 && !summaryVisible;
+    sticky.classList.toggle("is-on", on);
+    document.body.classList.toggle("sticky-on", on);
+  };
+  onUpdate = syncSticky;
 
   /* ---------- Gallery + lightbox ---------- */
 

@@ -7,7 +7,7 @@ window.SITE = {
   tagline: "Barber & Wear",
 
   // International format, digits only: 55 + DDD + number.
-  whatsapp: "5500000000000",
+  whatsapp: "5569999087663",
 
   address: "Av. Grove, 1992 — Centro",
   mapsQuery: "Av. Grove, 1992",

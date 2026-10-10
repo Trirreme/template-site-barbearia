@@ -135,23 +135,42 @@
 
   /* ---------- Loader (once per session) ---------- */
 
+  // Resolves when the intro is gone, so entrance animations play in view.
+  let endIntro;
+  const introDone = new Promise((r) => { endIntro = r; });
   const loader = $(".loader");
-  if (loader) {
-    let seen = false;
-    try { seen = sessionStorage.getItem("ganton.loaded") === "1"; sessionStorage.setItem("ganton.loaded", "1"); } catch { /* ignore */ }
-    const done = () => { loader.classList.add("is-done"); document.body.classList.remove("is-locked"); setTimeout(() => loader.remove(), 600); };
-    if (seen || reduced) { loader.remove(); }
-    else {
-      document.body.classList.add("is-locked");
-      const tips = [
-        "Dica: agende seu horário em 30 segundos e confirme no WhatsApp.",
-        "Dica: monte um look completo no Provador antes de vir à loja.",
-        `Dica: digite ${S.cheat.code} na sacola. Confia.`,
-      ];
-      $(".loader__tip", loader).textContent = tips[Math.floor(Math.random() * tips.length)];
-      $(".loader__skip", loader).addEventListener("click", done);
-      setTimeout(done, 1800);
-    }
+  let seen = false;
+  try { seen = sessionStorage.getItem("ganton.loaded") === "1"; sessionStorage.setItem("ganton.loaded", "1"); } catch { /* ignore */ }
+
+  if (!loader || seen || reduced) {
+    loader?.remove();
+    endIntro();
+  } else {
+    document.body.classList.add("is-locked", "is-intro");
+    const tips = [
+      "Dica: agende seu horário em 30 segundos e confirme no WhatsApp.",
+      "Dica: monte um look completo no Provador antes de vir à loja.",
+      `Dica: digite ${S.cheat.code} na sacola. Confia.`,
+    ];
+    $(".loader__tip", loader).textContent = tips[Math.floor(Math.random() * tips.length)];
+
+    let finished = false;
+    const done = () => {
+      if (finished) return;
+      finished = true;
+      loader.classList.add("is-done");
+      document.body.classList.remove("is-locked", "is-intro");
+      endIntro();
+      setTimeout(() => loader.remove(), 600);
+    };
+    $(".loader__skip", loader).addEventListener("click", done);
+
+    // Start only once the display fonts are in, so the logo never swaps mid-animation.
+    const fontsReady = Promise.race([document.fonts?.ready, new Promise((r) => setTimeout(r, 1500))]);
+    fontsReady.then(() => {
+      loader.classList.add("is-go");
+      setTimeout(done, 2300);
+    });
   }
 
   /* ---------- Header: scroll state, health = page progress, clock ---------- */
@@ -232,7 +251,7 @@
     { threshold: 0.18, rootMargin: "0px 0px -40px 0px" }
   );
   const observeReveals = (root = document) => $$("[data-reveal], .reveal-stats, .respect", root).forEach((el) => revealIO.observe(el));
-  observeReveals();
+  introDone.then(() => observeReveals());
 
   const zoneIO = new IntersectionObserver(
     (entries) => entries.forEach((e) => { if (e.isIntersecting) zone(e.target.dataset.zone); }),
