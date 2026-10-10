@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vestiário — Ganton</title>
+  <meta name="description" content="Streetwear, tênis e perfumaria. Monte seu look, separe na sacola e finalize pelo WhatsApp.">
+  <meta name="theme-color" content="#0b0c0a">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Permanent+Marker&family=Pirata+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="store">
+  <main>
+    <section class="phero" data-zone="Vestiário">
+      <div class="phero__bg"><img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1920&q=70" alt="" fetchpriority="high"></div>
+      <div class="wrap">
+        <span class="eyebrow" data-reveal>Streetwear · Tênis · Perfumaria</span>
+        <h1 class="gta"><span data-split>vestiário</span><small data-reveal style="--d:.6s">Ganton Wear</small></h1>
+        <p data-reveal style="--d:.7s">Monte o look no provador, separe na sacola e finalize pelo WhatsApp. Retira na loja ou recebe em casa.</p>
+        <div class="hero__ctas" data-reveal style="--d:.8s">
+          <a class="btn" href="#provador">Montar look</a>
+          <a class="btn btn--ghost" href="#catalogo">Ver catálogo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="provador" data-zone="Provador">
+      <div class="wrap wardrobe">
+        <div>
+          <div class="section-head" style="margin-bottom:28px">
+            <span class="eyebrow" data-reveal>Troca de roupa</span>
+            <h2 class="gta" data-reveal>provador</h2>
+            <p data-reveal>Passe as peças com as setas, como no jogo. O total atualiza na hora.</p>
+          </div>
+          <div class="gmenu__panel" data-reveal>
+            <div class="gmenu__title"><span>Seu look</span><small>Peça · preço</small></div>
+            <div id="wd-rows" role="list"></div>
+          </div>
+          <p class="kbd-hint" data-reveal>No teclado: <kbd>↑</kbd> <kbd>↓</kbd> escolhe a parte, <kbd>←</kbd> <kbd>→</kbd> troca a peça.</p>
+          <div class="wardrobe__actions" data-reveal>
+            <button class="btn" type="button" id="wd-add">Levar o look pra sacola</button>
+            <button class="btn btn--ghost" type="button" id="wd-random">Look aleatório</button>
+          </div>
+        </div>
+        <div class="mannequin" id="mannequin" data-reveal="slam" style="--r:3deg;--r-end:-1.2deg" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="drop" data-zone="Drop de sexta">
+      <div class="wrap drop__inner">
+        <div>
+          <h2 class="drop__title gta">próximo drop</h2>
+          <p>Peças novas toda sexta às 19h. Quem tá na lista do WhatsApp vê primeiro.</p>
+        </div>
+        <div class="count" id="count" aria-live="off">
+          <div><b data-u="d">00</b><small>dias</small></div>
+          <div><b data-u="h">00</b><small>horas</small></div>
+          <div><b data-u="m">00</b><small>min</small></div>
+          <div><b data-u="s">00</b><small>seg</small></div>
+        </div>
+        <a class="btn btn--sun" data-wa="Fala, Ganton! Me coloca na lista do drop de sexta 🔥" target="_blank" rel="noopener" href="#">Entrar na lista</a>
+      </div>
+    </section>
+
+    <section class="section" id="catalogo" data-zone="Catálogo">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Em estoque</span>
+          <h2 class="gta" data-reveal>catálogo</h2>
+          <p data-reveal>Escolha o tamanho e mande pra sacola. O valor aparece no <span class="money">$</span> lá em cima.</p>
+        </div>
+        <div class="filters" id="filters" role="group" aria-label="Filtrar por categoria"></div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/vestiario.js"></script>
+</body>
+</html>

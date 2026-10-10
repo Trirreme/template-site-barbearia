@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barbearia — Ganton</title>
+  <meta name="description" content="Corte, barba e freestyle. Escolha serviço, barbeiro e horário e confirme pelo WhatsApp.">
+  <meta name="theme-color" content="#0b0c0a">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Permanent+Marker&family=Pirata+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="barber" class="has-sticky">
+  <main>
+    <section class="phero" data-zone="Barbearia">
+      <div class="phero__bg"><img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1920&q=70" alt="" fetchpriority="high"></div>
+      <div class="wrap">
+        <span class="eyebrow" data-reveal>Corte · Barba · Freestyle</span>
+        <h1 class="gta"><span data-split>barbearia</span><small data-reveal style="--d:.6s">Ganton Barber</small></h1>
+        <p data-reveal style="--d:.7s">Cadeira marcada, sem fila. Escolha o serviço, o barbeiro e o horário: a confirmação sai pronta no WhatsApp.</p>
+        <div class="hero__ctas" data-reveal style="--d:.8s">
+          <a class="btn" href="#servicos">Marcar horário</a>
+          <a class="btn btn--ghost" href="#clube">Planos mensais</a>
+        </div>
+        <div class="facts" data-reveal style="--d:.9s">
+          <span class="fact"><b>★ 4,9</b> 312 avaliações</span>
+          <span class="fact"><b>3</b> barbeiros</span>
+          <span class="fact"><b>0</b> minutos de fila</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicos" data-zone="Serviços">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Passo 1 · pode marcar mais de um</span>
+          <h2 class="gta" data-reveal>cardápio da cadeira</h2>
+          <p data-reveal>Passe o mouse (ou toque) pra ver o serviço. Clique pra adicionar ao agendamento.</p>
+        </div>
+        <div class="gmenu">
+          <div class="gmenu__panel" data-reveal>
+            <div class="gmenu__title"><span>Serviços</span><small>Preço · tempo</small></div>
+            <ul class="gmenu__list" id="svc-list"></ul>
+            <div class="gmenu__foot"><span id="svc-count">Nenhum serviço</span><b id="svc-total">R$ 0,00</b></div>
+          </div>
+          <div class="preview" data-reveal style="--d:.1s">
+            <div class="panel"><img id="pv-img" src="" alt=""></div>
+            <h3 class="gta" id="pv-name"></h3>
+            <p id="pv-desc"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight halftone-bg" id="equipe" data-zone="Equipe">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Passo 2</span>
+          <h2 class="gta" data-reveal>escolha seu barbeiro</h2>
+          <p data-reveal>Cada um com sua especialidade. As barras não mentem.</p>
+        </div>
+        <div class="team" id="team"></div>
+      </div>
+    </section>
+
+    <section class="section" id="agenda" data-zone="Agenda">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Passo 3</span>
+          <h2 class="gta" data-reveal>dia e horário</h2>
+        </div>
+        <div class="booking">
+          <div data-reveal>
+            <div class="bk-block">
+              <p class="bk-label"><span>A</span> Escolha o dia</p>
+              <div class="days" id="days"></div>
+            </div>
+            <div class="bk-block">
+              <p class="bk-label"><span>B</span> Horários livres <em id="slot-who" style="font-style:normal;color:var(--sun)"></em></p>
+              <div class="slots" id="slots"></div>
+            </div>
+          </div>
+
+          <aside class="summary" id="resumo" data-reveal style="--d:.1s" aria-live="polite">
+            <div class="summary__head">Resumo</div>
+            <div class="summary__body">
+              <dl>
+                <div><dt>Serviços</dt><dd id="sm-svc"></dd></div>
+                <div><dt>Barbeiro</dt><dd id="sm-barber"></dd></div>
+                <div><dt>Quando</dt><dd id="sm-when"></dd></div>
+                <div><dt>Duração</dt><dd id="sm-dur"></dd></div>
+              </dl>
+              <div class="summary__total"><span>Total</span><b id="sm-total">R$ 0,00</b></div>
+              <div class="field">
+                <label for="bk-name">Seu nome</label>
+                <input id="bk-name" autocomplete="name" placeholder="Como te chamamos?">
+              </div>
+              <div class="field">
+                <label for="bk-note">Observação (opcional)</label>
+                <input id="bk-note" placeholder="Ex.: quero a lateral mais baixa">
+              </div>
+              <p class="hint" id="bk-hint"></p>
+              <button class="btn btn--block" type="button" id="bk-send" disabled></button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="cortes" data-zone="Galeria">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Feito aqui</span>
+          <h2 class="gta" data-reveal>galeria de cortes</h2>
+        </div>
+        <div class="gallery" id="gallery"></div>
+      </div>
+    </section>
+
+    <section class="section" id="clube" data-zone="Clube Ganton">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Assinatura mensal</span>
+          <h2 class="gta" data-reveal>clube ganton</h2>
+          <p data-reveal>Paga uma vez por mês e anda sempre na régua. Cancela quando quiser.</p>
+        </div>
+        <div class="plans" id="plans"></div>
+
+        <div class="respect">
+          <div class="respect__title zone-font">Respeito</div>
+          <div>
+            <p>Sem plano? Cada corte enche um pedaço da barra de respeito. Completou 10, o próximo é por nossa conta.</p>
+            <div class="respect__bar" role="img" aria-label="Exemplo: 7 de 10 cortes"><span></span><div class="respect__ticks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-cta" id="sticky">
+    <div class="sticky-cta__info"><span id="st-label">Monte seu horário</span><b id="st-total">R$ 0,00</b></div>
+    <a class="btn" href="#resumo">Ver resumo</a>
+  </div>
+
+  <dialog class="lightbox" id="lightbox">
+    <img src="" alt="">
+    <form method="dialog"><button>Fechar</button></form>
+  </dialog>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/barbearia.js"></script>
+</body>
+</html>
